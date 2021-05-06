@@ -24,6 +24,7 @@ public class GlobalParameters {
     private String DEVICE_TYPE;
     private String ENV;
     private String PATH_PROJECT = System.getProperty("user.dir");
+    private String DEVICE_FARM;
 
     private String APPIUM_AUTOMATION_NAME;
     private String APPIUM_IP_ADDRESS;
@@ -60,15 +61,26 @@ public class GlobalParameters {
     private String TEST_OBJECT_API_KEY;
     private String TEST_OBJECT_URL;
 
+    private String BROWSERSTACK_USER;
+    private String BROWSERSTACK_KEY ;
+    private String BROWSERSTACK_APP ;
+    private String BROWSERSTACK_DEVICE;
+    private String BROWSERSTACK_OS_VERSION;
+    private String BROWSERSTACK_PROJECT ;
+    private String BROWSERSTACK_BUILD ;
+    private String BROWSERSTACK_NAME;
+    private String BROWSERSTACK_URL;
+
+
     private Properties properties;
 
     public static final GlobalParameters params = new GlobalParameters();
 
-    public GlobalParameters(){
+    public GlobalParameters() {
         properties = new Properties();
         InputStream input = null;
         try {
-            input = new FileInputStream(PATH_PROJECT +"/globalParameters.properties");
+            input = new FileInputStream(PATH_PROJECT + "/globalParameters.properties");
             properties.load(input);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -87,11 +99,12 @@ public class GlobalParameters {
         REPORT_PATH = properties.getProperty("report.path");
         DEVICE_TYPE = properties.getProperty("device.type");
         REPORT_BY_EXECUTION = properties.getProperty("report.separate.by.execution");
+        DEVICE_FARM=properties.getProperty("device.farm");
 
         AppiumServer = properties.getProperty("AppiumServer");
         APPIUM_IP_ADDRESS = properties.getProperty("AppiumIPAddress");
         APPIUM_PORT = Integer.parseInt(properties.getProperty("AppiumPort"));
-        APPIUM_AUTOMATION_NAME =  properties.getProperty("AppiumAutomationName");
+        APPIUM_AUTOMATION_NAME = properties.getProperty("AppiumAutomationName");
         APPIUM_VERSION = properties.getProperty("AppiumVersion");
 
         ANDROID_DEVICE_NAME = properties.getProperty("AndroidDeviceName");
@@ -100,11 +113,11 @@ public class GlobalParameters {
         ANDROID_PLATFORM_VERSION = properties.getProperty("AndroidPlatformVersion");
         ANDROID_APP_PACKAGE = properties.getProperty("AndroidAppPackage");
         ANDROID_APP_ACTIVITY = properties.getProperty("AndroidAppActivity");
-        ANDROID_APP_PATH = PATH_PROJECT +"/src/main/resources/app/android/"+properties.getProperty("AndroidApp");
-        ANDROID_APP_BROWSER_NAME =properties.getProperty("AndroidBrowserName");
-        ANDROID_APP_NO_RESET =properties.getProperty("AndroidNoReset");
-        ANDROID_APP_FULL_RESET =properties.getProperty("AndroidFullReset");
-        ANDROID_APP_ORIENTATION =properties.getProperty("AndroidOrientation");
+        ANDROID_APP_PATH = PATH_PROJECT + "/src/main/resources/app/android/" + properties.getProperty("AndroidApp");
+        ANDROID_APP_BROWSER_NAME = properties.getProperty("AndroidBrowserName");
+        ANDROID_APP_NO_RESET = properties.getProperty("AndroidNoReset");
+        ANDROID_APP_FULL_RESET = properties.getProperty("AndroidFullReset");
+        ANDROID_APP_ORIENTATION = properties.getProperty("AndroidOrientation");
         ANDROID_AUTO_GRANT_PERMISSIONS = properties.getProperty("AndroidAutoGrantPermissions");
 
         IOS_UDID = properties.getProperty("IOSUDID");
@@ -117,11 +130,23 @@ public class GlobalParameters {
         IOS_FULL_RESET = properties.getProperty("IOSFullReset");
         IOS_SEND_KEY_STRATEGY = properties.getProperty("IOSSendKeyStrategy");
         IOS_AUTOMATION_NAME = properties.getProperty("IOSAutomationName");
-        IOS_DEVICE_NAME =properties.getProperty("IOSDeviceName");
-        IOS_APP_PATH = PATH_PROJECT +"/src/main/resources/app/ios/"+properties.getProperty("IOSApp");
+        IOS_DEVICE_NAME = properties.getProperty("IOSDeviceName");
+        IOS_APP_PATH = PATH_PROJECT + "/src/main/resources/app/ios/" + properties.getProperty("IOSApp");
 
-        TEST_OBJECT_API_KEY =properties.getProperty("TestObjectApiKey");
-        TEST_OBJECT_URL =properties.getProperty("TestObjectURL");
+        TEST_OBJECT_API_KEY = properties.getProperty("TestObjectApiKey");
+        TEST_OBJECT_URL = properties.getProperty("TestObjectURL");
+
+        BROWSERSTACK_USER = properties.getProperty("browserstack.user");
+        BROWSERSTACK_KEY = properties.getProperty("browserstack.key");
+        BROWSERSTACK_APP = properties.getProperty("browserstack.app");
+        BROWSERSTACK_DEVICE = properties.getProperty("browserstack.device");
+        BROWSERSTACK_OS_VERSION = properties.getProperty("browserstack.os_version");
+        BROWSERSTACK_PROJECT = properties.getProperty("browserstack.project");
+        BROWSERSTACK_BUILD = properties.getProperty("browserstack.build");
+        BROWSERSTACK_NAME = properties.getProperty("browserstack.name");
+        BROWSERSTACK_URL=properties.getProperty("browserstack.url");
+
+
     }
 
     public String getBROWSER_DEFAULT() {
@@ -170,6 +195,10 @@ public class GlobalParameters {
 
     public String getPATH_PROJECT() {
         return PATH_PROJECT;
+    }
+
+    public String getDEVICE_FARM() {
+        return DEVICE_FARM;
     }
 
     public String getAPPIUM_AUTOMATION_NAME() {
@@ -294,5 +323,41 @@ public class GlobalParameters {
 
     public String getTEST_OBJECT_URL() {
         return TEST_OBJECT_URL;
+    }
+
+    public String getBROWSERSTACK_USER() {
+        return BROWSERSTACK_USER;
+    }
+
+    public String getBROWSERSTACK_KEY() {
+        return BROWSERSTACK_KEY;
+    }
+
+    public String getBROWSERSTACK_APP() {
+        return BROWSERSTACK_APP;
+    }
+
+    public String getBROWSERSTACK_DEVICE() {
+        return BROWSERSTACK_DEVICE;
+    }
+
+    public String getBROWSERSTACK_OS_VERSION() {
+        return BROWSERSTACK_OS_VERSION;
+    }
+
+    public String getBROWSERSTACK_PROJECT() {
+        return BROWSERSTACK_PROJECT;
+    }
+
+    public String getBROWSERSTACK_BUILD() {
+        return BROWSERSTACK_BUILD;
+    }
+
+    public String getBROWSERSTACK_NAME() {
+        return BROWSERSTACK_NAME;
+    }
+
+    public String getBROWSERSTACK_URL() {
+        return BROWSERSTACK_URL;
     }
 }
