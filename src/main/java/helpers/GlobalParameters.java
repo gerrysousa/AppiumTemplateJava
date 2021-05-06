@@ -5,58 +5,64 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import org.apache.http.annotation.Contract;
 
 public class GlobalParameters {
 
-    public static String BROWSER_DEFAULT;
-    public static int TIMEOUT_DEFAULT;
-    public static String SELENIUM_HUB;
-    public static String URL_DEFAULT;
-    public static String REPORT_NAME;
-    public static String GET_SCREENSHOT_FOR_EACH_STEP;
-    public static String DOWNLOAD_DEFAULT_PATH;
-    public static String REPORT_PATH;
-    public static String DB_SID;
-    public static String REPORT_BY_EXECUTION;
-    public static String DEVICE_TYPE;
-    public static String ENV;
-    public static String PATH_PROJECT = System.getProperty("user.dir");
+    public static final String PKG_QA = "com.abinbev.hive.brazil.qa";
+    public static final String PKG_UAT = "com.abinbev.hive.brazil.uat";
 
-    public static String APPIUM_AUTOMATION_NAME;
-    public static String APPIUM_IP_ADDRESS;
-    public static int APPIUM_PORT;
-    public static String APPIUM_VERSION;
-    public static String AppiumServer;
+    private String BROWSER_DEFAULT;
+    private int TIMEOUT_DEFAULT;
+    private String SELENIUM_HUB;
+    private String URL_DEFAULT;
+    private String REPORT_NAME;
+    private String GET_SCREENSHOT_FOR_EACH_STEP;
+    private String DOWNLOAD_DEFAULT_PATH;
+    private String REPORT_PATH;
+    private String REPORT_BY_EXECUTION;
+    private String DEVICE_TYPE;
+    private String ENV;
+    private String PATH_PROJECT = System.getProperty("user.dir");
 
-    public static String ANDROID_DEVICE_NAME;
-    public static String ANDROID_UDID;
-    public static String ANDROID_PLATFORM_NAME;
-    public static String ANDROID_PLATFORM_VERSION;
-    public static String ANDROID_APP_PACKAGE;
-    public static String ANDROID_APP_ACTIVITY;
-    public static String ANDROID_APP_PATH;
-    public static String ANDROID_APP_BROWSER_NAME;
-    public static String ANDROID_APP_NO_RESET;
-    public static String ANDROID_APP_FULL_RESET;
-    public static String ANDROID_APP_ORIENTATION;
+    private String APPIUM_AUTOMATION_NAME;
+    private String APPIUM_IP_ADDRESS;
+    private int APPIUM_PORT;
+    private String APPIUM_VERSION;
+    private String AppiumServer;
 
-    public static String IOS_UDID;
-    public static String IOS_PLATFORM_NAME;
-    public static String IOS_PLATFORM_VERSION;
-    public static String IOS_REPORT_FORMAT;
-    public static String IOS_TEST_NAME;
-    public static String IOS_NO_RESET;
-    public static String IOS_FULL_RESET;
-    public static String IOS_SEND_KEY_STRATEGY;
-    public static String IOS_AUTOMATION_NAME;
-    public static String IOS_DEVICE_NAME;
-    public static String IOS_APP_PATH;
-    public static String IOS_BUNDLE_ID;
+    private String ANDROID_DEVICE_NAME;
+    private String ANDROID_UDID;
+    private String ANDROID_PLATFORM_NAME;
+    private String ANDROID_PLATFORM_VERSION;
+    private String ANDROID_APP_PACKAGE;
+    private String ANDROID_APP_ACTIVITY;
+    private String ANDROID_APP_PATH;
+    private String ANDROID_APP_BROWSER_NAME;
+    private String ANDROID_APP_NO_RESET;
+    private String ANDROID_APP_FULL_RESET;
+    private String ANDROID_APP_ORIENTATION;
+    private String ANDROID_AUTO_GRANT_PERMISSIONS;
 
-    public static String TEST_OBJECT_API_KEY;
-    public static String TEST_OBJECT_URL;
+    private String IOS_UDID;
+    private String IOS_PLATFORM_NAME;
+    private String IOS_PLATFORM_VERSION;
+    private String IOS_REPORT_FORMAT;
+    private String IOS_TEST_NAME;
+    private String IOS_NO_RESET;
+    private String IOS_FULL_RESET;
+    private String IOS_SEND_KEY_STRATEGY;
+    private String IOS_AUTOMATION_NAME;
+    private String IOS_DEVICE_NAME;
+    private String IOS_APP_PATH;
+    private String IOS_BUNDLE_ID;
+
+    private String TEST_OBJECT_API_KEY;
+    private String TEST_OBJECT_URL;
 
     private Properties properties;
+
+    public static final GlobalParameters params = new GlobalParameters();
 
     public GlobalParameters(){
         properties = new Properties();
@@ -99,6 +105,7 @@ public class GlobalParameters {
         ANDROID_APP_NO_RESET =properties.getProperty("AndroidNoReset");
         ANDROID_APP_FULL_RESET =properties.getProperty("AndroidFullReset");
         ANDROID_APP_ORIENTATION =properties.getProperty("AndroidOrientation");
+        ANDROID_AUTO_GRANT_PERMISSIONS = properties.getProperty("AndroidAutoGrantPermissions");
 
         IOS_UDID = properties.getProperty("IOSUDID");
         IOS_PLATFORM_NAME = properties.getProperty("IOSPlatformName");
@@ -115,5 +122,177 @@ public class GlobalParameters {
 
         TEST_OBJECT_API_KEY =properties.getProperty("TestObjectApiKey");
         TEST_OBJECT_URL =properties.getProperty("TestObjectURL");
+    }
+
+    public String getBROWSER_DEFAULT() {
+        return BROWSER_DEFAULT;
+    }
+
+    public int getTIMEOUT_DEFAULT() {
+        return TIMEOUT_DEFAULT;
+    }
+
+    public String getSELENIUM_HUB() {
+        return SELENIUM_HUB;
+    }
+
+    public String getURL_DEFAULT() {
+        return URL_DEFAULT;
+    }
+
+    public String getREPORT_NAME() {
+        return REPORT_NAME;
+    }
+
+    public String getGET_SCREENSHOT_FOR_EACH_STEP() {
+        return GET_SCREENSHOT_FOR_EACH_STEP;
+    }
+
+    public String getDOWNLOAD_DEFAULT_PATH() {
+        return DOWNLOAD_DEFAULT_PATH;
+    }
+
+    public String getREPORT_PATH() {
+        return REPORT_PATH;
+    }
+
+    public String getREPORT_BY_EXECUTION() {
+        return REPORT_BY_EXECUTION;
+    }
+
+    public String getDEVICE_TYPE() {
+        return DEVICE_TYPE;
+    }
+
+    public String getENV() {
+        return ENV;
+    }
+
+    public String getPATH_PROJECT() {
+        return PATH_PROJECT;
+    }
+
+    public String getAPPIUM_AUTOMATION_NAME() {
+        return APPIUM_AUTOMATION_NAME;
+    }
+
+    public String getAPPIUM_IP_ADDRESS() {
+        return APPIUM_IP_ADDRESS;
+    }
+
+    public int getAPPIUM_PORT() {
+        return APPIUM_PORT;
+    }
+
+    public String getAPPIUM_VERSION() {
+        return APPIUM_VERSION;
+    }
+
+    public String getAppiumServer() {
+        return AppiumServer;
+    }
+
+    public String getANDROID_DEVICE_NAME() {
+        return ANDROID_DEVICE_NAME;
+    }
+
+    public String getANDROID_UDID() {
+        return ANDROID_UDID;
+    }
+
+    public String getANDROID_PLATFORM_NAME() {
+        return ANDROID_PLATFORM_NAME;
+    }
+
+    public String getANDROID_PLATFORM_VERSION() {
+        return ANDROID_PLATFORM_VERSION;
+    }
+
+    public String getANDROID_APP_PACKAGE() {
+        return ANDROID_APP_PACKAGE;
+    }
+
+    public String getANDROID_APP_ACTIVITY() {
+        return ANDROID_APP_ACTIVITY;
+    }
+
+    public String getANDROID_APP_PATH() {
+        return ANDROID_APP_PATH;
+    }
+
+    public String getANDROID_APP_BROWSER_NAME() {
+        return ANDROID_APP_BROWSER_NAME;
+    }
+
+    public String getANDROID_APP_NO_RESET() {
+        return ANDROID_APP_NO_RESET;
+    }
+
+    public String getANDROID_APP_FULL_RESET() {
+        return ANDROID_APP_FULL_RESET;
+    }
+
+    public String getANDROID_APP_ORIENTATION() {
+        return ANDROID_APP_ORIENTATION;
+    }
+
+    public String getANDROID_AUTO_GRANT_PERMISSIONS() {
+        return ANDROID_AUTO_GRANT_PERMISSIONS;
+    }
+
+    public String getIOS_UDID() {
+        return IOS_UDID;
+    }
+
+    public String getIOS_PLATFORM_NAME() {
+        return IOS_PLATFORM_NAME;
+    }
+
+    public String getIOS_PLATFORM_VERSION() {
+        return IOS_PLATFORM_VERSION;
+    }
+
+    public String getIOS_REPORT_FORMAT() {
+        return IOS_REPORT_FORMAT;
+    }
+
+    public String getIOS_TEST_NAME() {
+        return IOS_TEST_NAME;
+    }
+
+    public String getIOS_NO_RESET() {
+        return IOS_NO_RESET;
+    }
+
+    public String getIOS_FULL_RESET() {
+        return IOS_FULL_RESET;
+    }
+
+    public String getIOS_SEND_KEY_STRATEGY() {
+        return IOS_SEND_KEY_STRATEGY;
+    }
+
+    public String getIOS_AUTOMATION_NAME() {
+        return IOS_AUTOMATION_NAME;
+    }
+
+    public String getIOS_DEVICE_NAME() {
+        return IOS_DEVICE_NAME;
+    }
+
+    public String getIOS_APP_PATH() {
+        return IOS_APP_PATH;
+    }
+
+    public String getIOS_BUNDLE_ID() {
+        return IOS_BUNDLE_ID;
+    }
+
+    public String getTEST_OBJECT_API_KEY() {
+        return TEST_OBJECT_API_KEY;
+    }
+
+    public String getTEST_OBJECT_URL() {
+        return TEST_OBJECT_URL;
     }
 }

@@ -21,18 +21,17 @@ import java.time.Duration;
 import java.util.HashMap;
 
 import static helpers.DriverFactory.getDriver;
+import static helpers.GlobalParameters.params;
 
 public class BasePage {
-    //private static ExtentTest log;
     private static WebDriverWait wait;
     protected AppiumDriver driver = null;
     protected JavascriptExecutor javaScriptExecutor = null;
 
     public BasePage() {
-       // this.log = BaseTests.log;
         PageFactory.initElements(new AppiumFieldDecorator(getDriver()),this);
         driver = getDriver();
-        wait = new WebDriverWait (driver, GlobalParameters.TIMEOUT_DEFAULT);
+        wait = new WebDriverWait (driver, params.getTIMEOUT_DEFAULT());
     }
 
     protected void waitElement(MobileElement element){
@@ -51,12 +50,11 @@ public class BasePage {
 
     protected void click(MobileElement element){
         String methodOfOrigin = Thread.currentThread().getStackTrace()[2].getMethodName();
-       // ExtentReportsUtils.addTestInfoSimple("Act: '" + methodOfOrigin+"'");
         ExtentReportsUtils.addTestInfoSimple("Act: '" + methodOfOrigin+"'");
         WebDriverException possibleWebDriverException = null;
         StopWatch timeOut = new StopWatch();
         timeOut.start();
-        while (timeOut.getTime() <= GlobalParameters.TIMEOUT_DEFAULT)
+        while (timeOut.getTime() <= params.getTIMEOUT_DEFAULT())//TODO: Check if need add a new condition to avoid loop
         {
             try
             {
@@ -146,7 +144,7 @@ public class BasePage {
         ExtentReportsUtils.addTestInfoSimple("Text "+element+" = "+text);
         return text;
     }
-    
+
     protected String getValue(MobileElement element){
         String methodOfOrigin = Thread.currentThread().getStackTrace()[2].getMethodName();
         ExtentReportsUtils.addTestInfoSimple("Act: '" + methodOfOrigin+"'");
@@ -164,7 +162,7 @@ public class BasePage {
         ExtentReportsUtils.addTestInfoSimple("Text "+element+" = "+text);
         return text;
     }
-    
+
     protected boolean returnIfElementIsDisplayed(MobileElement element){
         String methodOfOrigin = Thread.currentThread().getStackTrace()[2].getMethodName();
         ExtentReportsUtils.addTestInfoSimple("Act: '" + methodOfOrigin+"'");
@@ -197,8 +195,8 @@ public class BasePage {
         ExtentReportsUtils.addTestInfoSimple("Act: '" + methodOfOrigin+"'");
         TouchAction actions = new TouchAction(driver);
         actions.press(PointOption.point(startElement.getLocation().x,startElement.getLocation().y))
-                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(seconds)))
-                .moveTo(PointOption.point(endElement.getLocation().x,endElement.getLocation().y)).release().perform();
+            .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(seconds)))
+            .moveTo(PointOption.point(endElement.getLocation().x,endElement.getLocation().y)).release().perform();
     }
 
     protected void scrollUsingTouchAction(int startX,int startY, int endX, int endY, int seconds) {
@@ -206,8 +204,8 @@ public class BasePage {
         ExtentReportsUtils.addTestInfoSimple("Act: '" + methodOfOrigin+"'");
         TouchAction actions = new TouchAction(driver);
         actions.press(PointOption.point(startX,startY))
-                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(seconds)))
-                .moveTo(PointOption.point(endX,endY)).release().perform();
+            .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(seconds)))
+            .moveTo(PointOption.point(endX,endY)).release().perform();
     }
 
     protected void longPress(MobileElement element) {
@@ -258,8 +256,8 @@ public class BasePage {
 
         TouchAction actions = new TouchAction(driver);
         actions.press(PointOption.point(x,startY))
-                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
-                .moveTo(PointOption.point(x,endY)).release().perform();
+            .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+            .moveTo(PointOption.point(x,endY)).release().perform();
     }
 
     public void swipe(double initialPosition, double finalPosition) {
@@ -274,8 +272,8 @@ public class BasePage {
 
         TouchAction actions = new TouchAction(driver);
         actions.press(PointOption.point(start_x,y))
-                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
-                .moveTo(PointOption.point(end_x,y)).release().perform();
+            .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+            .moveTo(PointOption.point(end_x,y)).release().perform();
     }
 
     public void scrollDown() {
@@ -297,7 +295,7 @@ public class BasePage {
     public void takeAScreenShot() {
         try
         {
-            String temp = helpers.DataUtils.getScreenshot(getDriver());
+            String temp = helpers.ExtentReportsUtils.takeScreenshot(getDriver());
             ExtentReportsUtils.TEST.info("Take a screenshot!", MediaEntityBuilder.createScreenCaptureFromPath(temp).build());
         }
         catch (Exception e)
@@ -321,8 +319,8 @@ public class BasePage {
 
         TouchAction actions = new TouchAction(getDriver());
         actions.press(PointOption.point(x,start_y))
-                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
-                .moveTo(PointOption.point(x,end_y)).release().perform();
+            .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+            .moveTo(PointOption.point(x,end_y)).release().perform();
     }
 
     public void swipeElement(MobileElement element, double initialPosition, double finalPosition) {
@@ -334,8 +332,8 @@ public class BasePage {
 
         TouchAction actions = new TouchAction(getDriver());
         actions.press(PointOption.point(start_x, y))
-                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
-                .moveTo(PointOption.point(end_x, y)).release().perform();
+            .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+            .moveTo(PointOption.point(end_x, y)).release().perform();
 
     }
 
@@ -345,9 +343,9 @@ public class BasePage {
         ExtentReportsUtils.addTestInfoSimple("Scroll action with coordinates: xInitial="+xInitial+", yInitial="+yInitial+", xFinal="+xFinal+", yFinal="+yFinal+".");
         TouchAction actions = new TouchAction(getDriver());
         actions.tap(PointOption.point(xInitial, yInitial))
-                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
-                .moveTo(PointOption.point(xFinal, yFinal)).release()
-                .perform();
+            .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+            .moveTo(PointOption.point(xFinal, yFinal)).release()
+            .perform();
     }
 
     public void scrollDownIOS() {
@@ -372,7 +370,7 @@ public class BasePage {
         waitElement(element);
         TouchAction actions = new TouchAction(getDriver());
         actions.longPress(PointOption.point(element.getCenter().getX(),element.getCenter().getY()))
-                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).perform();
+            .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).perform();
     }
 
     public boolean verifyIfTextIsDisplayedOnElement(MobileElement element ,String text) {

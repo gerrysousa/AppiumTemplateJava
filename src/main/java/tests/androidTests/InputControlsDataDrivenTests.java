@@ -8,8 +8,7 @@ import pages.InputControlsDatePickerPage;
 import pages.InputControlsTimePickerPage;
 import helpers.ExcelUtils;
 import steps.*;
-
-import static helpers.GlobalParameters.PATH_PROJECT;
+import static helpers.GlobalParameters.params;
 
 public class InputControlsDataDrivenTests extends BaseTests {
 
@@ -22,13 +21,13 @@ public class InputControlsDataDrivenTests extends BaseTests {
 
     @DataProvider
     public Object[][] obterDadosParaTesteDatePicker(){
-        Object[][] testObjArray = ExcelUtils.getTableArray(PATH_PROJECT +"/src/main/resources/TestData.xlsx","datePicker");
+        Object[][] testObjArray = ExcelUtils.getTableArray(params.getPATH_PROJECT() +"/src/main/resources/TestData.xlsx","datePicker");
         return (testObjArray);
     }
 
     @DataProvider
     public Object[][] obterDadosParaTesteTimePicker(){
-        Object[][] testObjArray = ExcelUtils.getTableArray(PATH_PROJECT +"/src/main/resources/TestData.xlsx","timePicker");
+        Object[][] testObjArray = ExcelUtils.getTableArray(params.getPATH_PROJECT() +"/src/main/resources/TestData.xlsx","timePicker");
         return (testObjArray);
     }
 

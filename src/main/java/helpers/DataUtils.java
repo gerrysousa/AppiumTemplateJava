@@ -11,25 +11,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static helpers.GlobalParameters.PATH_PROJECT;
+
 
 public class DataUtils {
-    public static String getScreenshot(WebDriver driver)
-    {
-        TakesScreenshot ts=(TakesScreenshot) driver;
-        File src=ts.getScreenshotAs(OutputType.FILE);
-        String path= PATH_PROJECT +"/target/reports/Screenshot/"+System.currentTimeMillis()+".png";
-        File destination=new File(path);
 
-        try
-        {
-            FileUtils.copyFile(src, destination);
-        } catch (IOException e)
-        {
-            System.out.println("Capture Failed "+e.getMessage());
-        }
-        return path;
-    }
     public static String getDateFormatyyyyMMdd()
     {
         Calendar calendar = Calendar.getInstance();

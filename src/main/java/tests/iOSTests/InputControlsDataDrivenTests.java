@@ -1,7 +1,10 @@
 package tests.iOSTests;
 
 
+import static helpers.GlobalParameters.params;
+
 import base.BaseTests;
+import helpers.GlobalParameters;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -9,7 +12,7 @@ import pages.InputControlsDatePickerPage;
 import helpers.ExcelUtils;
 import steps.*;
 
-import static helpers.GlobalParameters.PATH_PROJECT;
+
 
 public class InputControlsDataDrivenTests extends BaseTests {
 
@@ -19,7 +22,7 @@ public class InputControlsDataDrivenTests extends BaseTests {
 
     @DataProvider
     public Object[][] obterDadosParaTesteDatePicker(){
-        Object[][] testObjArray = ExcelUtils.getTableArray(PATH_PROJECT +"/src/main/resources/TestData.xlsx","datePicker");
+        Object[][] testObjArray = ExcelUtils.getTableArray(params.getPATH_PROJECT() +"/src/main/resources/TestData.xlsx","datePicker");
         return (testObjArray);
     }
 

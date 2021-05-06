@@ -1,5 +1,6 @@
 package helpers;
 
+import static helpers.GlobalParameters.params;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -9,8 +10,6 @@ import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Parameters;
-
 import java.net.URL;
 
 public class DriverFactory {
@@ -19,11 +18,10 @@ public class DriverFactory {
     private AppiumServiceBuilder builder;
     public WebDriverWait wait;
 
-
     public DriverFactory() {
         builder = new AppiumServiceBuilder();
-        builder.withIPAddress(GlobalParameters.APPIUM_IP_ADDRESS);
-        builder.usingPort(GlobalParameters.APPIUM_PORT);
+        builder.withIPAddress(params.getAPPIUM_IP_ADDRESS());
+        builder.usingPort(params.getAPPIUM_PORT());
         builder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
         // If you need display only errors on terminal
         //builder.withArgument(GeneralServerFlag.LOG_LEVEL,"error");
@@ -31,14 +29,14 @@ public class DriverFactory {
         service.start();
     }
 
-    @Parameters({"deviceType"})
+
     public static AppiumDriver<MobileElement> getDriver() {
         if (driver == null) {
-            if (GlobalParameters.ENV.equals("remote")){
-                DriverFactory.createDriverDeviceFarm(GlobalParameters.DEVICE_TYPE);
+            if ("remote".equals(params.getENV())){
+                DriverFactory.createDriverDeviceFarm(params.getDEVICE_TYPE());
             }
             else {
-                DriverFactory.createDriver(GlobalParameters.DEVICE_TYPE);
+                DriverFactory.createDriver(params.getDEVICE_TYPE());
             }
         }
         return driver;
@@ -51,34 +49,35 @@ public class DriverFactory {
 
     public static AppiumDriver<MobileElement> createDriver(String deviceType){
         try {
-            if (deviceType.equals("android")) {
+            if ("android".equals(deviceType)) {
                 DesiredCapabilities caps = new DesiredCapabilities();
-                caps.setCapability("platformName", GlobalParameters.ANDROID_PLATFORM_NAME);
-                caps.setCapability("platformVersion", GlobalParameters.ANDROID_PLATFORM_VERSION);
-                caps.setCapability("deviceName", GlobalParameters.ANDROID_DEVICE_NAME);
-                caps.setCapability("app", GlobalParameters.ANDROID_APP_PATH);
-                caps.setCapability("browserName", GlobalParameters.ANDROID_APP_BROWSER_NAME);
-                caps.setCapability("udid", GlobalParameters.ANDROID_UDID);
-                caps.setCapability("noReset", GlobalParameters.ANDROID_APP_NO_RESET);
-                caps.setCapability("fullReset", GlobalParameters.ANDROID_APP_FULL_RESET);
-                caps.setCapability("orientation", GlobalParameters.ANDROID_APP_ORIENTATION);
-                caps.setCapability("automationName", GlobalParameters.APPIUM_AUTOMATION_NAME);
-                driver = new AndroidDriver(new URL(GlobalParameters.AppiumServer), caps);
+                caps.setCapability("platformName", params.getANDROID_PLATFORM_NAME());
+                caps.setCapability("platformVersion", params.getANDROID_PLATFORM_VERSION());
+                caps.setCapability("deviceName", params.getANDROID_DEVICE_NAME());
+                caps.setCapability("app", params.getANDROID_APP_PATH());
+                caps.setCapability("browserName", params.getANDROID_APP_BROWSER_NAME());
+                caps.setCapability("udid", params.getANDROID_UDID());
+                caps.setCapability("noReset", params.getANDROID_APP_NO_RESET());
+                caps.setCapability("fullReset", params.getANDROID_APP_FULL_RESET());
+                caps.setCapability("orientation", params.getANDROID_APP_ORIENTATION());
+                caps.setCapability("automationName", params.getAPPIUM_AUTOMATION_NAME());
+                caps.setCapability("autoGrantPermissions", params.getANDROID_AUTO_GRANT_PERMISSIONS());
+                driver = new AndroidDriver(new URL(params.getAppiumServer()), caps);
             }
-            else if (deviceType.equals("ios"))
+            else if ("ios".equals(deviceType))
             {
                 DesiredCapabilities caps = new DesiredCapabilities();
-                caps.setCapability("platformName", GlobalParameters.IOS_PLATFORM_NAME);
-                caps.setCapability("platformVersion", GlobalParameters.IOS_PLATFORM_VERSION);
-                caps.setCapability("deviceName", GlobalParameters.IOS_DEVICE_NAME);
-                caps.setCapability("automationName", GlobalParameters.IOS_AUTOMATION_NAME);
-                caps.setCapability("app", GlobalParameters.IOS_APP_PATH);
-                //caps.setCapability("bundleId", GlobalParameters.IOSBundleId);
-                //caps.setCapability("udid", GlobalParameters.IOSUDID);
+                caps.setCapability("platformName", params.getIOS_PLATFORM_NAME());
+                caps.setCapability("platformVersion", params.getIOS_PLATFORM_VERSION());
+                caps.setCapability("deviceName", params.getIOS_DEVICE_NAME());
+                caps.setCapability("automationName", params.getIOS_AUTOMATION_NAME());
+                caps.setCapability("app", params.getIOS_APP_PATH());
+                //caps.setCapability("bundleId", params.getIOSBundleId);
+                //caps.setCapability("udid", params.getIOSUDID);
                 //caps.setCapability(CapabilityType.BROWSER_NAME, "safari");
-                //caps.setCapability("noReset", GlobalParameters.IOSNoReset);
-                //caps.setCapability("fullReset", GlobalParameters.IOSFullReset);
-                driver = new IOSDriver(new URL(GlobalParameters.AppiumServer), caps);
+                //caps.setCapability("noReset", params.getIOSNoReset);
+                //caps.setCapability("fullReset", params.getIOSFullReset);
+                driver = new IOSDriver(new URL(params.getAppiumServer()), caps);
             }
         }
         catch (Exception e)
@@ -88,26 +87,28 @@ public class DriverFactory {
         return driver;
     }
 
-    public static AppiumDriver<MobileElement> createDriverDeviceFarm(String deviceType){
+    public static AppiumDriver<MobileElement> createDriverDeviceFarm(String deviceType) {
         try {
-            if (deviceType.equals("android")) {
+            if ("android".equals(deviceType)) {
                 DesiredCapabilities caps = new DesiredCapabilities();
-                caps.setCapability("platformName", GlobalParameters.ANDROID_PLATFORM_NAME);
-                caps.setCapability("automationName", GlobalParameters.APPIUM_AUTOMATION_NAME);
-                caps.setCapability("testobject_api_key", GlobalParameters.TEST_OBJECT_API_KEY);
-                caps.setCapability("appiumVersion", GlobalParameters.APPIUM_VERSION);
-                driver = new AndroidDriver(new URL(GlobalParameters.TEST_OBJECT_URL), caps);
+                caps.setCapability("platformName", params.getANDROID_PLATFORM_NAME());
+                caps.setCapability("automationName", params.getAPPIUM_AUTOMATION_NAME());
+                caps.setCapability("testobject_api_key", params.getTEST_OBJECT_API_KEY());
+                caps.setCapability("appiumVersion", params.getAPPIUM_VERSION());
+                driver = new AndroidDriver(new URL(params.getTEST_OBJECT_URL()), caps);
             }
-            else if (deviceType.equals("ios")) {
+            else if ("ios".equals(deviceType)) {
 
             }
-
+            return driver;
         }
         catch (Exception e)
         {
-            System.out.print("Alert! Could not create the APPIUM driver!!!!!");
+            System.err.print("Alert! Could not create the APPIUM driver!!!!! Message: "+e.getMessage());
+            e.printStackTrace();
+            System.exit(1);
         }
-        return driver;
+        return null;
     }
 
     public static void killDriver()     {
@@ -117,11 +118,14 @@ public class DriverFactory {
             driver = null;
         }
     }
+
     public static void resetDriver()     {
         if (driver != null)
         {
+            //driver.resetApp(); //it is not necessary because for each test Appium run a reset (noReset=false)
             driver.closeApp();
-            driver.resetApp();
         }
     }
+
+
 }

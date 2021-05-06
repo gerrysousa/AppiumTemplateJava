@@ -1,6 +1,8 @@
 package helpers;
 
 import static helpers.DriverFactory.getDriver;
+import static helpers.GlobalParameters.params;
+
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
@@ -22,18 +24,20 @@ public class ExtentReportsUtils
   public static ExtentReports EXTENT_REPORT = null;
   public static ExtentTest TEST;
   public static ExtentSparkReporter HTML_REPORTER = null;
-  static String reportName = GlobalParameters.REPORT_NAME + "_" + GeneralUtils.getNowDate("yyyy-MM-dd_HH-mm-ss");
-  static String reportsPath = GlobalParameters.REPORT_PATH;
+  static String reportName = params.getREPORT_NAME() + "_" + GeneralUtils.getNowDate("yyyy-MM-dd_HH-mm-ss");
+  static String reportsPath = params.getPATH_PROJECT()+params.getREPORT_PATH();
   static String fileName = reportName+".html";
   static String fullReportFilePath = reportsPath + "/"+ fileName;
 
   public static void createReport(){
-    if (GlobalParameters.REPORT_BY_EXECUTION.equals("true"))
-      fullReportFilePath = reportsPath + "/"+ reportName +"/" + fileName;
+    if ("true".equals(params.getREPORT_BY_EXECUTION())) {
+      fullReportFilePath = reportsPath + "/" + reportName + "/" + fileName;
+      reportsPath = reportsPath + "/" + reportName + "/";
+    }
     if (EXTENT_REPORT == null){
       HTML_REPORTER = new ExtentSparkReporter(fullReportFilePath);
       HTML_REPORTER.config().setTheme(Theme.DARK);
-      HTML_REPORTER.config().setReportName(GlobalParameters.REPORT_NAME);
+      HTML_REPORTER.config().setReportName(params.getREPORT_NAME());
       EXTENT_REPORT = new ExtentReports();
       EXTENT_REPORT.attachReporter(HTML_REPORTER);
     }
@@ -44,7 +48,7 @@ public class ExtentReportsUtils
   }
 
   public static void addTestInfo(int methodLevel, String text) {
-    if (GlobalParameters.GET_SCREENSHOT_FOR_EACH_STEP.equals("true"))
+    if ("true".equals(params.getGET_SCREENSHOT_FOR_EACH_STEP()))
     {
       try {
         String temp= takeScreenshot(getDriver());
@@ -62,7 +66,7 @@ public class ExtentReportsUtils
   }
 
   public static void addTestInfoSimple(String text) {
-    if (GlobalParameters.GET_SCREENSHOT_FOR_EACH_STEP.equals("true"))
+    if ("true".equals(params.getGET_SCREENSHOT_FOR_EACH_STEP()))
     {
       try {
         String temp= takeScreenshot(getDriver());
@@ -108,7 +112,7 @@ public class ExtentReportsUtils
     TakesScreenshot ts=(TakesScreenshot) driver;
     File src=ts.getScreenshotAs(OutputType.FILE);
     String fileName = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
-    String path= GlobalParameters.PATH_PROJECT+reportsPath+"/Screenshot/"+fileName+".png";
+    String path= reportsPath+"Screenshot/"+fileName+".png";
     File destination=new File(path);
 
     try
