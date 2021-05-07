@@ -1,64 +1,69 @@
 # AppiumTemplateJava
+Made by @gerrysousa
 
-@gerrysousa
-Copiado do meu template de appium com Net Core
+Setup Project
 
-Configure o Appium
-
-Introdução
-- Etapa 1: Instale o Java Development Kit 
+Introduction
+- Step 1: Install the Java Development Kit (JDK)
   - (JDK)[JDK Download](https://www.oracle.com/java/technologies/javase-downloads.html)
-- Etapa 2: Configurar o caminho da variável de ambiente Java 
-  - (% JAVA_HOME% \ bin ou C: Arquivos de programas \ Java \ jdk1.8.0_45 \ bin)
-  -Para testar se a configuração está correta execute o seguinte comando no CMD "java -version"
 
-- Etapa 3: Instale o Android SDK / ADB no Windows 
+- Step 2: Set Up Java Environment Variable Path
+  - (% JAVA_HOME% \ bin ou C: Progam Files \ Java \ jdk1.8.0_45 \ bin)
+  - Check if configuration is correct running the follow command in terminal: 
+  - ```$java -version```
+
+- Step 3: Install Android SDK / ADB on Windows
   - [Android Studio- SDK Download](https://developer.android.com/studio#Other)
 
-- Etapa 4: Instalar pacotes do Android SDK
+- Step 4: Install Android SDK Packages in Android Studio
 
-- Etapa 5: Configurar a variável de ambiente Android
-  - Varialvel de Sistema : "ANDROID_HOME" = "C:\Program Files (x86)\Android\android-sdk"
+- Step 5: Set up Android Environment Variable and Path
+  - Environment Variable : "ANDROID_HOME" = "C:\Program Files (x86)\Android\android-sdk"
   - Path: %ANDROID_HOME%\platform-tools
   - Path: %ANDROID_HOME%\tools
   - Path: %ANDROID_HOME%\tools\bin
   
-- Etapa 6: Baixe e instale NodeJs 
+- Step 6: Download and Install NodeJs
   - [Download Node JS](https://nodejs.org/en/download/)
-    - Instalar Appium Service no Node.
-```$npm install -g appium```
+  - Install the Appium service using the npm command.
+  - ```$npm install -g appium```
 
-- Etapa 7: Instale o Microsoft .net Core
+- Step 7: Install Microsoft .net Framework
   - [Dot Net Core 3.1- Download](https://dotnet.microsoft.com/download/dotnet-core/3.1)
 
-- Etapa 8: Baixe e instale o Appium Desktop Client
+- Step 8: Download And Install Appium Desktop Client
   - [Appium v1.18.0 - Download](https://github.com/appium/appium-desktop/releases/tag/v1.18.0-1)
-  - [Todas versões do Appium - Download](https://github.com/appium/appium-desktop/tags)
+  - [All Appium Versions - Download](https://github.com/appium/appium-desktop/tags)
   
-- Etapa 9: Habilite as opções do modo de desenvolvedor no telefone ou tablet Android
+- Step 9: Enabling Developer Mode Options on Android Phone or Tablet
 
-- Etapa 10: Instale Visual Studio 2019 e configure um projeto
-  - [Visual Studio 2019 - Download](https://visualstudio.microsoft.com/pt-br/downloads/)
+- Step 10: Install your IDE And Set up a Project
+  - [IntelliJ IDEA - Download](https://www.jetbrains.com/idea/download/#section=windows)
+  - [Eclipse IDE - Download](https://www.eclipse.org/downloads/)
 
-- Etapa 11: Abrir o projeto no Visual Studio e compilar o codigo para iniciar o Download das dependências do projeto
-
-- Etapa 12: Primeiro teste Appium para iniciar o aplicativo
-  - Executar o executavel do Appium
-  - Clicar no Botão "Start Server v1.18.0" no program do Appium
-  - Clicar no Botão "Start Inspector Session" (simbolo de uma Lupa)
-  - Colocar todas as capacidades informadas abaixo
+- Step 11: Download Maven Dependencies
+  - Inside path project run the command: ````$mvn clean````
+  
+- Step 12: Running Appium Tests
+  - Run Appium Desktop
+  - Click "Start Server v1.18.0" on Appium Desktop
+  - Run Android Emulator
+  - On IDE, run test as testng tests.
+  
+--------------------------------------
+- Expect mobile Screens on Appium Desktop
+  - Click button "Start Inspector Session" on Appium Desktop
+  - Fill in capabilities 
     - "platformName": "android",
     - "deviceName": "Teste",
     - "platform": "android",
     - "app": "C:\caminho\para\o\App\app-debug.apk",
     - "AutomationName": "UiAutomator2",
     - "udid": "emulator-5554"
-  - Clicar no botão "Start Session". O Appium deverá iniciar o aplicativo "app-debug.apk" no emulador/celular informado no "UDID"
-- Observação:  O emulador deve estar em execução, ou o celular deve estar conectado ao computador que o Appium está rodando.
+  - Click button "Start Session". Appium must install and run "app-debug.apk" in emulador/device informed "UDID"
+- Obs:  The emulator must be running, or the device must be conected on usb port that Appium Desktop is running.
 
-
-
-Configuração minima para o servidor Appium iniciar uma App no Device:
+Sample config to Appium server install the apk in a device:
 ```
 {
   "platformName": "android",
@@ -69,18 +74,30 @@ Configuração minima para o servidor Appium iniciar uma App no Device:
   "udid": "emulator-5554"
 }
 ```
-Comandos Uteis:
-- Listar dispositivos Adb, para pegar o UDID dos dispositivos:
+
+- Expect mobile Screens Android uiautomatorviewer
+ - In the android sdk folder "C:\Program Files\Android\android-sdk\tools\bin" execute "uiautomatorviewer.bat" file
+
+
+Useful Commands:
+- List Adb devices , to catch device UDID:
 ```
 $adb devices
-Resultado: emulator-5554   device
+Result: emulator-5554   device
 ```
-- Listar Emuladores, para pegar o nome dos emuladores:
+- List Emulators, to catch device names:
 ```
 $emulator -list-avds
-Resultado: Pixel_3a_API_28
+Result: Pixel_3a_API_28
 ```
-- Instalar Appium Service no Node.
+- Install Appium Service on Node.
 ```$npm install -g appium```
 
-@gerrysousa
+- Tests execution on Device Farms:
+    - Modify some parameter on "globalParameters.properties" file on root path project: 
+    ```env=remote``` , ```device.farm=browserstack```, and run the follow command: 
+    
+```$mvn test "-DsuiteXmlFile=src/main/java/tests/xml/LoginTests.xml"```
+
+
+Made by @gerrysousa
