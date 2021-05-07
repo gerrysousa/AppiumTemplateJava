@@ -26,7 +26,7 @@ public class BaseTests {
     {
         ExtentReportsUtils.addTestResult(result);
         ExtentReportsUtils.generateReport();
-        DriverFactory.resetDriver();
+        DriverFactory.killDriver();
     }
 
     @AfterSuite

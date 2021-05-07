@@ -132,7 +132,7 @@ public class DriverFactory {
 
     public static void resetDriver() {
         if (driver != null) {
-            //driver.resetApp(); //it is not necessary because for each test Appium run a reset (noReset=false)
+            driver.resetApp(); //it is not necessary because for each test Appium run a reset (noReset=false)
             driver.closeApp();
         }
     }
