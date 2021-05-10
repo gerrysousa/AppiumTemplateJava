@@ -10,12 +10,6 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: replacetokens@3
-  displayName: 'Replace tokens'
-  inputs:
-    targetFiles: |
-      **/globalParameters.properties
-
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
