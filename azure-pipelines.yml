@@ -18,19 +18,8 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
-    publishJUnitResults: false
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'clean'
-
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
     publishJUnitResults: true
-    testResultsFiles: '**target/reports/index.html'
+    testResultsFiles: 'target/surefire-reports/junitreports/TEST*.xml'
     goals: 'test "-DsuiteXmlFile=src/main/java/tests/xml/LoginTests.xml"'
   env:
     BROWSERSTACK_USER: $(BROWSERSTACK_USER)
