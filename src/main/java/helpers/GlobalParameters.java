@@ -1,9 +1,12 @@
 package helpers;
 
+import static java.util.Objects.nonNull;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 import java.util.Properties;
 import org.apache.http.annotation.Contract;
 
@@ -88,65 +91,63 @@ public class GlobalParameters {
             e.printStackTrace();
         }
 
-        BROWSER_DEFAULT = properties.getProperty("browser.default");
-        ENV = properties.getProperty("env");
-        TIMEOUT_DEFAULT = Integer.parseInt(properties.getProperty("timeout.default"));
-        SELENIUM_HUB = properties.getProperty("selenium.hub");
-        URL_DEFAULT = properties.getProperty("url.default");
-        REPORT_NAME = properties.getProperty("report.name");
-        GET_SCREENSHOT_FOR_EACH_STEP = properties.getProperty("get.screenshot.for.each.step");
-        DOWNLOAD_DEFAULT_PATH = properties.getProperty("download.defaul.path");
-        REPORT_PATH = properties.getProperty("report.path");
-        DEVICE_TYPE = properties.getProperty("device.type");
-        REPORT_BY_EXECUTION = properties.getProperty("report.separate.by.execution");
-        DEVICE_FARM=properties.getProperty("device.farm");
+        BROWSER_DEFAULT = getProperty("browser.default");
+        ENV = getProperty("env");
+        TIMEOUT_DEFAULT = Integer.parseInt(getProperty("timeout.default"));
+        SELENIUM_HUB = getProperty("selenium.hub");
+        URL_DEFAULT = getProperty("url.default");
+        REPORT_NAME = getProperty("report.name");
+        GET_SCREENSHOT_FOR_EACH_STEP = getProperty("get.screenshot.for.each.step");
+        DOWNLOAD_DEFAULT_PATH = getProperty("download.defaul.path");
+        REPORT_PATH = getProperty("report.path");
+        DEVICE_TYPE = getProperty("device.type");
+        REPORT_BY_EXECUTION = getProperty("report.separate.by.execution");
+        DEVICE_FARM=getProperty("device.farm");
 
-        AppiumServer = properties.getProperty("AppiumServer");
-        APPIUM_IP_ADDRESS = properties.getProperty("AppiumIPAddress");
-        APPIUM_PORT = Integer.parseInt(properties.getProperty("AppiumPort"));
-        APPIUM_AUTOMATION_NAME = properties.getProperty("AppiumAutomationName");
-        APPIUM_VERSION = properties.getProperty("AppiumVersion");
+        AppiumServer = getProperty("AppiumServer");
+        APPIUM_IP_ADDRESS = getProperty("AppiumIPAddress");
+        APPIUM_PORT = Integer.parseInt(getProperty("AppiumPort"));
+        APPIUM_AUTOMATION_NAME = getProperty("AppiumAutomationName");
+        APPIUM_VERSION = getProperty("AppiumVersion");
 
-        ANDROID_DEVICE_NAME = properties.getProperty("AndroidDeviceName");
-        ANDROID_UDID = properties.getProperty("AndroidUDID");
-        ANDROID_PLATFORM_NAME = properties.getProperty("AndroidPlatformName");
-        ANDROID_PLATFORM_VERSION = properties.getProperty("AndroidPlatformVersion");
-        ANDROID_APP_PACKAGE = properties.getProperty("AndroidAppPackage");
-        ANDROID_APP_ACTIVITY = properties.getProperty("AndroidAppActivity");
-        ANDROID_APP_PATH = PATH_PROJECT + "/src/main/resources/app/android/" + properties.getProperty("AndroidApp");
-        ANDROID_APP_BROWSER_NAME = properties.getProperty("AndroidBrowserName");
-        ANDROID_APP_NO_RESET = properties.getProperty("AndroidNoReset");
-        ANDROID_APP_FULL_RESET = properties.getProperty("AndroidFullReset");
-        ANDROID_APP_ORIENTATION = properties.getProperty("AndroidOrientation");
-        ANDROID_AUTO_GRANT_PERMISSIONS = properties.getProperty("AndroidAutoGrantPermissions");
+        ANDROID_DEVICE_NAME = getProperty("AndroidDeviceName");
+        ANDROID_UDID = getProperty("AndroidUDID");
+        ANDROID_PLATFORM_NAME = getProperty("AndroidPlatformName");
+        ANDROID_PLATFORM_VERSION = getProperty("AndroidPlatformVersion");
+        ANDROID_APP_PACKAGE = getProperty("AndroidAppPackage");
+        ANDROID_APP_ACTIVITY = getProperty("AndroidAppActivity");
+        ANDROID_APP_PATH = PATH_PROJECT + "/src/main/resources/app/android/" + getProperty("AndroidApp");
+        ANDROID_APP_BROWSER_NAME = getProperty("AndroidBrowserName");
+        ANDROID_APP_NO_RESET = getProperty("AndroidNoReset");
+        ANDROID_APP_FULL_RESET = getProperty("AndroidFullReset");
+        ANDROID_APP_ORIENTATION = getProperty("AndroidOrientation");
+        ANDROID_AUTO_GRANT_PERMISSIONS = getProperty("AndroidAutoGrantPermissions");
 
-        IOS_UDID = properties.getProperty("IOSUDID");
-        IOS_PLATFORM_NAME = properties.getProperty("IOSPlatformName");
-        IOS_PLATFORM_VERSION = properties.getProperty("IOSPlatformVersion");
-        IOS_BUNDLE_ID = properties.getProperty("IOSBundleId");
-        IOS_REPORT_FORMAT = properties.getProperty("IOSReportFormat");
-        IOS_TEST_NAME = properties.getProperty("IOSTestName");
-        IOS_NO_RESET = properties.getProperty("IOSNoReset");
-        IOS_FULL_RESET = properties.getProperty("IOSFullReset");
-        IOS_SEND_KEY_STRATEGY = properties.getProperty("IOSSendKeyStrategy");
-        IOS_AUTOMATION_NAME = properties.getProperty("IOSAutomationName");
-        IOS_DEVICE_NAME = properties.getProperty("IOSDeviceName");
-        IOS_APP_PATH = PATH_PROJECT + "/src/main/resources/app/ios/" + properties.getProperty("IOSApp");
+        IOS_UDID = getProperty("IOSUDID");
+        IOS_PLATFORM_NAME = getProperty("IOSPlatformName");
+        IOS_PLATFORM_VERSION = getProperty("IOSPlatformVersion");
+        IOS_BUNDLE_ID = getProperty("IOSBundleId");
+        IOS_REPORT_FORMAT = getProperty("IOSReportFormat");
+        IOS_TEST_NAME = getProperty("IOSTestName");
+        IOS_NO_RESET = getProperty("IOSNoReset");
+        IOS_FULL_RESET = getProperty("IOSFullReset");
+        IOS_SEND_KEY_STRATEGY = getProperty("IOSSendKeyStrategy");
+        IOS_AUTOMATION_NAME = getProperty("IOSAutomationName");
+        IOS_DEVICE_NAME = getProperty("IOSDeviceName");
+        IOS_APP_PATH = PATH_PROJECT + "/src/main/resources/app/ios/" + getProperty("IOSApp");
 
-        TEST_OBJECT_API_KEY = properties.getProperty("TestObjectApiKey");
-        TEST_OBJECT_URL = properties.getProperty("TestObjectURL");
+        TEST_OBJECT_API_KEY = getProperty("TestObjectApiKey");
+        TEST_OBJECT_URL = getProperty("TestObjectURL");
 
-        BROWSERSTACK_USER = properties.getProperty("browserstack.user");
-        BROWSERSTACK_KEY = properties.getProperty("browserstack.key");
-        BROWSERSTACK_APP = properties.getProperty("browserstack.app");
-        BROWSERSTACK_DEVICE = properties.getProperty("browserstack.device");
-        BROWSERSTACK_OS_VERSION = properties.getProperty("browserstack.os_version");
-        BROWSERSTACK_PROJECT = properties.getProperty("browserstack.project");
-        BROWSERSTACK_BUILD = properties.getProperty("browserstack.build");
-        BROWSERSTACK_NAME = properties.getProperty("browserstack.name");
-        BROWSERSTACK_URL=properties.getProperty("browserstack.url");
-
-
+        BROWSERSTACK_USER = getProperty("browserstack.user");
+        BROWSERSTACK_KEY = getProperty("browserstack.key");
+        BROWSERSTACK_APP = getProperty("browserstack.app");
+        BROWSERSTACK_DEVICE = getProperty("browserstack.device");
+        BROWSERSTACK_OS_VERSION = getProperty("browserstack.os_version");
+        BROWSERSTACK_PROJECT = getProperty("browserstack.project");
+        BROWSERSTACK_BUILD = getProperty("browserstack.build");
+        BROWSERSTACK_NAME = getProperty("browserstack.name");
+        BROWSERSTACK_URL=getProperty("browserstack.url");
     }
 
     public String getBROWSER_DEFAULT() {
@@ -359,5 +360,12 @@ public class GlobalParameters {
 
     public String getBROWSERSTACK_URL() {
         return BROWSERSTACK_URL;
+    }
+
+    private String getProperty(String propertyKey) {
+        Objects.requireNonNull(propertyKey);
+        String environmentKey = propertyKey.toUpperCase().replaceAll("\\.", "_");
+        String fromEnvironment = System.getenv(environmentKey);
+        return (fromEnvironment == null) ? properties.getProperty(propertyKey) : fromEnvironment;
     }
 }
