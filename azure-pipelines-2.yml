@@ -25,9 +25,11 @@ steps:
     BROWSERSTACK_KEY: $(BROWSERSTACK_KEY)
     BROWSERSTACK_APP: $(BROWSERSTACK_APP)
 
-- task: PublishTestResults@2
+- task: PublishBuildArtifacts@1
   inputs:
-    testResultsFiles: 'target/reports'
+    PathtoPublish: 'target/reports'
+    ArtifactName: 'ExtentReportsTests'
+    publishLocation: Container
     #searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
     #mergeTestResults: false # Optional
     #failTaskOnFailedTests: false # Optional
