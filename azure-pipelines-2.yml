@@ -24,11 +24,9 @@ steps:
     BROWSERSTACK_USER: $(BROWSERSTACK_USER)
     BROWSERSTACK_KEY: $(BROWSERSTACK_KEY)
     BROWSERSTACK_APP: $(BROWSERSTACK_APP)
-# Publish Test Results
-# Publish test results to Azure Pipelines
+
 - task: PublishTestResults@2
   inputs:
-    #testResultsFormat: 'JUnit' # Options: JUnit, NUnit, VSTest, xUnit, cTest
     testResultsFiles: 'target/reports/index.html'
     #searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
     #mergeTestResults: false # Optional
