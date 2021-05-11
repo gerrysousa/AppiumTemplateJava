@@ -27,7 +27,7 @@ steps:
 
 - task: PublishTestResults@2
   inputs:
-    testResultsFiles: 'target/reports/index.html'
+    testResultsFiles: 'target/reports'
     #searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
     #mergeTestResults: false # Optional
     #failTaskOnFailedTests: false # Optional
