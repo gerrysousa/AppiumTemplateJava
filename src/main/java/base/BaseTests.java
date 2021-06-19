@@ -13,6 +13,7 @@ public class BaseTests {
     @BeforeSuite
     public void beforeSuite() {
         new GlobalParameters();
+        new DriverFactory();
         ExtentReportsUtils.createReport();
     }
 

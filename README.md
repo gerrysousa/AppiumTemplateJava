@@ -100,4 +100,19 @@ Result: Pixel_3a_API_28
 ```$mvn test "-DsuiteXmlFile=src/main/java/tests/xml/LoginTests.xml"```
 
 
+Upload app to BrowserStack:
+```
+curl -u "bt_user:bt_Key" -X POST "https://api-cloud.browserstack.com/app-automate/upload" -F "file=@path/to/app.apk" -F "custom_id=AppNameOptional"
+```
+Response example:
+```
+{
+	"app_url": "bs://xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+	"custom_id": "AppNameOptional",
+	"shareable_id": "bt_user/AppNameOptional"
+}
+```
+
+
+
 Made by @gerrysousa
