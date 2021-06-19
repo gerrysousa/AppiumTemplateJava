@@ -100,6 +100,13 @@ Result: Pixel_3a_API_28
 ```$mvn test "-DsuiteXmlFile=src/main/java/tests/xml/LoginTests.xml"```
 
 
+- Running Tests parallel execution on Device Farms: 
+   
+```$mvn test "-DsuiteXmlFile=src/main/java/tests/xml/ParallelTests.xml"```
+
+
+
+
 Upload app to BrowserStack:
 ```
 curl -u "bt_user:bt_Key" -X POST "https://api-cloud.browserstack.com/app-automate/upload" -F "file=@path/to/app.apk" -F "custom_id=AppNameOptional"
