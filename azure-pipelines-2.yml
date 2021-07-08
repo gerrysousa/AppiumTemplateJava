@@ -1,0 +1,39 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: 'target/surefire-reports/junitreports/TEST*.xml'
+    goals: 'test "-DsuiteXmlFile=src/main/java/tests/xml/LoginTests.xml"'
+  env:
+    BROWSERSTACK_USER: $(BROWSERSTACK_USER)
+    BROWSERSTACK_KEY: $(BROWSERSTACK_KEY)
+    BROWSERSTACK_APP: $(BROWSERSTACK_APP)
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'target/reports'
+    ArtifactName: 'ExtentReportsTests'
+    publishLocation: Container
+    #searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
+    #mergeTestResults: false # Optional
+    #failTaskOnFailedTests: false # Optional
+    #testRunTitle: # Optional
+    #buildPlatform: # Optional
+    #buildConfiguration: # Optional
+    #publishRunAttachments: true # Optional
